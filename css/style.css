@@ -35,6 +35,9 @@
     --spacing-xl: 3rem;
     --spacing-2xl: 4rem;
 
+    /* Radius */
+    --radius-sm: 0.5rem;
+
     /* Container */
     --container-default: 920px;
     --container-wide: 1330px;
@@ -57,7 +60,7 @@ body {
     font-family: var(--font-family-base);
     font-size: var(--font-size-base);
     color: var(--color-black);
-    background-color: var(--color-white);
+    background-color: var(--color-gray-light);
 }
 
 /* Heding */
@@ -96,7 +99,6 @@ a {
 
 /* Images */
 img {
-    display: block;
     max-width: 100%;
     height: auto;
 }
@@ -105,6 +107,32 @@ img {
 nav a {
     padding: var(--spacing-xs) var(--spacing-md);
     text-decoration: none;
+}
+
+/**
+ * LAYOUT
+ * Element de mise en page
+ * --------------------------------------------- */
+.flow,
+.flow-reverse {
+    display: flex;
+    flex-direction: column;
+}
+
+.flow > *,
+.flow-reverse > * {
+    flex: 1;
+}
+
+@media (min-width: 768px) {
+    .flow,
+    .flow-reverse {
+        flex-direction: row;
+        align-items: center;
+    }
+    .flow-reverse {
+        flex-direction: row-reverse;
+    }
 }
 
 /**
@@ -136,18 +164,6 @@ nav a {
     }
 }
 
-/* Hero section */
-.hero {
-    padding: var(--spacing-xl) var(--spacing-md);
-}
-
-@media (min-width: 768px) {
-    .hero {
-        display: flex;
-        align-items: center;
-    }
-}
-
 /* Container : Définis la largeur max d'une section ou autre */
 .container,
 .container-wide {
@@ -158,4 +174,54 @@ nav a {
 }
 .container-wide {
     max-width: var(--container-wide);
+}
+
+/* Sections */
+.section {
+    padding: var(--spacing-2xl) var(--spacing-md);
+}
+
+/* Card */
+.card {
+    padding: var(--spacing-md);
+    background-color: var(--color-white);
+    text-align: center;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md);
+}
+
+/* Boutons */
+.button {
+    display: inline-block;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius-sm);
+}
+
+/**
+ * UTILITAIRES
+ * elles ne font qu'une chose et une seul
+ * --------------------------------------------- */
+.ml-auto {
+    margin-left: auto;
+}
+.mr-auto {
+    margin-right: auto;
+}
+
+/* Text */
+.text-left {
+    text-align: left;
+}
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+/* Gap */
+.gap-lg {
+    gap: var(--spacing-lg);
 }
