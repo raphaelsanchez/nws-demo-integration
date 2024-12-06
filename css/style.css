@@ -32,3 +32,64 @@
     --spacing-xl: 3rem;
     --spacing-2xl: 4rem;
 }
+
+/**
+ * RESET
+ * --------------------------------------------- */
+*,
+*::before *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/**
+ * BASES
+ * --------------------------------------------- */
+body {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    color: var(--color-black);
+    background-color: var(--color-gray-light);
+}
+
+/* Heding */
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-family-heading);
+}
+
+h1 {
+    font-size: var(--font-size-2xl);
+}
+
+h2 {
+    font-size: var(--font-size-xl);
+}
+
+h3 {
+    font-size: var(--font-size-lg);
+}
+
+h4 {
+    font-size: var(--font-size-base);
+}
+
+/* Paragraphe */
+p + p {
+    margin-top: var(--spacing-md);
+}
+
+/* Liens */
+a {
+    color: inherit;
+}
+
+/* Images */
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
