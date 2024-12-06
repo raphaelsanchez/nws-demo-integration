@@ -42,7 +42,13 @@
     --font-family-heading: "Chonburi", serif;
     --font-family-base: "system-ui", sans-serif;
 
-    /* Font sizes */
+    /* 
+    Font sizes 
+    Utilisation de clamp() pour avoir des tailles de police responsive
+    en fonction de la taille de l'écran.
+    voir: https://developer.mozilla.org/fr/docs/Web/CSS/clamp
+    outils: https://clamp.font-size.app/
+    */
     --font-size-base: clamp(1rem, 0.929rem + 0.2273vw, 1.125rem);
     --font-size-lg: clamp(1.125rem, 0.9119rem + 0.6818vw, 1.5rem);
     --font-size-xl: clamp(2.125rem, 1.7131rem + 1.3182vw, 2.85rem);
@@ -161,6 +167,11 @@ img {
     vertical-align: bottom;
 }
 
+svg {
+    display: block;
+    fill: currentColor;
+}
+
 /* Navigation */
 nav a {
     padding: var(--spacing-xs) var(--spacing-md);
@@ -212,6 +223,13 @@ nav a:hover {
     max-width: var(--container-wide);
 }
 
+/* Sections */
+.section {
+    /* Utilisation de clamp() pour avec des espaces responsive entre les sections */
+    padding: clamp(var(--spacing-xl), 0.0795rem + 4.5455vw, var(--spacing-2xl))
+        var(--spacing-lg);
+}
+
 /**
  * COMPOSANTS
  * Styles pour les composants de la page.
@@ -245,6 +263,70 @@ nav a:hover {
     padding: var(--spacing-lg);
 }
 
+/* Pour les mobiles uniquement */
+@media (max-width: 768px) {
+    .header {
+        position: relative;
+    }
+    .header-nav {
+        position: absolute;
+        top: calc(100% - var(--spacing-md));
+        right: 1rem;
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+        background: var(--color-gray-light);
+        box-shadow: var(--shadow-md);
+        z-index: 10;
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+        scale: 0.9;
+        transition: all 200ms ease-in-out;
+        transform-origin: top right;
+    }
+
+    .header-nav.open {
+        opacity: 1;
+        scale: 1;
+        pointer-events: auto;
+        visibility: visible;
+    }
+}
+
+/* 
+Menu toggler 
+Un bouton pour ouvrir et fermer le menu de navigation sur mobile.
+*/
+.menu-toggler {
+    padding: var(--spacing-md);
+    background: none;
+    border: none;
+}
+
+/* Les icones */
+.menu-toggler-icon-close {
+    display: none;
+}
+
+.menu-toggler-icon-open {
+    display: block;
+}
+
+/* Permutation des icones suivant l'état du menu */
+.menu-toggler[aria-expanded="true"] .menu-toggler-icon-close {
+    display: block;
+}
+
+.menu-toggler[aria-expanded="true"] .menu-toggler-icon {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .menu-toggler {
+        display: none;
+    }
+}
+
 /* Footer */
 .footer {
     display: flex;
@@ -259,11 +341,6 @@ nav a:hover {
         align-items: center;
         justify-content: space-between;
     }
-}
-
-/* Sections */
-.section {
-    padding: var(--spacing-2xl) var(--spacing-md);
 }
 
 /* 
