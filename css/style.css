@@ -1,11 +1,36 @@
+/*
+ * OPEN ENTREPRISE - STYLES PRINCIPAUX
+ *
+ * @autor: Raphael Sanchez <hello@raphaelsanchez.design>
+ * @version: 1.0.0
+ *
+ * Ce fichier contient les styles CSS de base pour le projet.
+ * Il est divisé en plusieurs sections pour faciliter la lecture et la maintenance.
+ * Les commentaires sont là pour vous aider à comprendre chaque section.
+ 
+ * SOMMAIRE
+ * - Tokens : variables CSS qui stockent des valeurs réutilisables.
+ * - Reset : réinitialise les styles par défaut des navigateurs.
+ * - Bases : styles de base pour le contenu de la page.
+ * - Layout : styles de mise en page pour les composants de la page.
+ * - Composants : styles pour les composants de la page.
+ * - Utilitaires : styles utilitaires pour les composants de la page.
+*/
+
 :root {
-    /* Créer les tokens CSS (variables) que vais pouvoir réutilser */
+    /* 
+    TOKENS CSS
+    Les tokens CSS sont des variables qui stockent des valeurs
+    que vous pouvez réutiliser dans votre CSS et eviter de répéter.
+    Ils permettent aussi de garder une cohérence dans votre design.
+    see: https://developer.mozilla.org/fr/docs/Web/CSS/Using_CSS_custom_properties
+    */
 
     /* Colors */
     --color-black: #303031;
     --color-gray: #66645e;
-    --color-gray-medium: #e5e5e5;
-    --color-gray-light: #f3f0ea;
+    --color-gray-medium: #f4f0ea;
+    --color-gray-light: #f9f9f9;
     --color-white: #ffffff;
     --color-primary: #71a894;
     --color-secondary: #f5c64f;
@@ -18,14 +43,18 @@
     --font-family-base: "system-ui", sans-serif;
 
     /* Font sizes */
-    --font-size-base: 1rem; /* 16px */
-    --font-size-lg: 1.5rem;
-    --font-size-xl: 3rem;
-    --font-size-2xl: 4rem;
+    --font-size-base: clamp(1rem, 0.929rem + 0.2273vw, 1.125rem);
+    --font-size-lg: clamp(1.125rem, 0.9119rem + 0.6818vw, 1.5rem);
+    --font-size-xl: clamp(2.125rem, 1.7131rem + 1.3182vw, 2.85rem);
+    --font-size-2xl: clamp(2.5rem, 1.7898rem + 2.2727vw, 3.75rem);
 
     /* Font weight */
     --font-weight-normal: 400;
     --font-weight-bold: 700;
+
+    /* Line height */
+    --line-height-heading: 1.1;
+    --line-height-base: 1.5;
 
     /* Spacing */
     --spacing-2xs: 0.25rem;
@@ -40,25 +69,50 @@
 
     /* Container */
     --container-default: 920px;
-    --container-wide: 1330px;
+    --container-wide: 1380px;
 }
 
 /**
  * RESET
+ * Réinitialise les styles par défaut des navigateurs. Ici nous le faisons de manière light.
+ * Il existe toutefois des reset CSS plus complet comme Normalize.css ou Reset.css
  * --------------------------------------------- */
 *,
-*::before *::after {
-    margin: 0;
-    padding: 0;
+*::before,
+*::after {
     box-sizing: border-box;
+}
+
+*:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+}
+
+/* Supprimez toutes les animations et transitions pour les personnes qui préfèrent ne pas les voir */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 /**
  * BASES
+ * Styles de base pour le contenu de la page.
+ * Les styles de base ne s'appliquent qu'aux éléments HTML de base (les baslises)
+ * et ne possèdent que le strict minimum pour que le contenu soit lisible.
  * --------------------------------------------- */
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
 body {
     font-family: var(--font-family-base);
     font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
     color: var(--color-black);
     background-color: var(--color-gray-light);
 }
@@ -69,6 +123,8 @@ h2,
 h3,
 h4 {
     font-family: var(--font-family-heading);
+    line-height: var(--line-height-heading);
+    text-wrap: balance;
 }
 
 h1 {
@@ -95,12 +151,14 @@ p + p {
 /* Liens */
 a {
     color: inherit;
+    text-underline-offset: 0.25rem;
 }
 
 /* Images */
 img {
     max-width: 100%;
     height: auto;
+    vertical-align: bottom;
 }
 
 /* Navigation */
@@ -108,11 +166,18 @@ nav a {
     padding: var(--spacing-xs) var(--spacing-md);
     text-decoration: none;
 }
+nav a:hover {
+    text-decoration: underline;
+}
 
 /**
  * LAYOUT
- * Element de mise en page
+ * Styles de mise en page pour les composants de la page.
+ * Ils sont utilisés pour structurer la page et les composants de manière cohérente
+ * et doivent être agnostiques et réutilisables.
  * --------------------------------------------- */
+
+/* Flow : permet de controller simplement la création de colonnes qui stack en mobile */
 .flow,
 .flow-reverse {
     display: flex;
@@ -135,9 +200,41 @@ nav a {
     }
 }
 
+/* Container : Définis la largeur max d'une section ou autre */
+.container,
+.container-wide {
+    margin-inline: auto;
+}
+.container {
+    max-width: var(--container-default);
+}
+.container-wide {
+    max-width: var(--container-wide);
+}
+
 /**
  * COMPOSANTS
+ * Styles pour les composants de la page.
+ * Les composants sont des éléments de l'interface utilisateur qui sont réutilisables
+ * et peuvent être utilisés dans plusieurs endroits de la page.
+ * Ils sont généralement plus spécifiques que les styles de mise en page comme les sections ou les conteneurs.
+ * (ex: boutons, cartes, formulaires, etc.)
  * --------------------------------------------- */
+
+/* Nav */
+.nav {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+    .nav {
+        flex-direction: row;
+        gap: var(--spacing-md);
+    }
+}
+
 /* Header */
 .header {
     display: flex;
@@ -164,21 +261,30 @@ nav a {
     }
 }
 
-/* Container : Définis la largeur max d'une section ou autre */
-.container,
-.container-wide {
-    margin-inline: auto;
-}
-.container {
-    max-width: var(--container-default);
-}
-.container-wide {
-    max-width: var(--container-wide);
-}
-
 /* Sections */
 .section {
     padding: var(--spacing-2xl) var(--spacing-md);
+}
+
+/* 
+    Separator
+    Un séparateur simple pour diviser les sections ou la page.
+    Ici on utilise un gradient radial pour créer un effet de pointillé.
+    On utilise aussi une variable CSS pour pouvoir ajuster la hauteur du séparateur
+    directement dans le HTML depuis un attribut "style".
+
+    ex: <div class="dot-separator" style="--height:4.5rem"></div>
+*/
+.dot-separator {
+    width: 100%;
+    height: var(--height, 3rem);
+    background-image: radial-gradient(
+        circle,
+        var(--color-gray-medium) 3px,
+        transparent 3px
+    );
+    background-size: 16px 16px;
+    background-position: center;
 }
 
 /* Card */
@@ -190,19 +296,57 @@ nav a {
     box-shadow: var(--shadow-md);
 }
 
+.card-title {
+    font-size: var(--font-size-lg);
+    font-family: var(--font-family-base);
+}
+
 /* Boutons */
 .button {
+    position: relative;
+    isolation: isolate;
     display: inline-block;
     padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-black);
+    color: var(--color-white);
+    text-decoration: none;
+    font-weight: var(--font-weight-bold);
+}
+
+.button::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background-color: rgb(255 255 255 / 0.2);
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+}
+.button:hover::before {
+    opacity: 1;
+}
+
+/* Button variants */
+.button-primary {
     background-color: var(--color-primary);
     color: var(--color-white);
-    border-radius: var(--radius-sm);
+}
+
+.button-secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-black);
 }
 
 /**
  * UTILITAIRES
- * elles ne font qu'une chose et une seul
+ * Styles utilitaires pour les composants de la page.
+ * Les utilitaires sont des classes qui peuvent être utilisées pour appliquer des styles spécifiques
+ * à un élément sans avoir à créer de nouvelles classes CSS.
+ * On les utilise pour faire des ajustement rapides et ponctuels sans avoir à créer de nouvelles classes.
  * --------------------------------------------- */
+
+/* Spacings */
 .ml-auto {
     margin-left: auto;
 }
@@ -210,10 +354,20 @@ nav a {
     margin-right: auto;
 }
 
+.mt-xl {
+    margin-top: var(--spacing-xl);
+}
+
+/* Gap */
+.gap-lg {
+    gap: var(--spacing-lg);
+}
+
 /* Text */
 .text-left {
     text-align: left;
 }
+
 .text-center {
     text-align: center;
 }
@@ -221,7 +375,23 @@ nav a {
 .text-right {
     text-align: right;
 }
-/* Gap */
-.gap-lg {
-    gap: var(--spacing-lg);
+
+.text-lg {
+    font-size: var(--font-size-lg);
+}
+
+.text-xl {
+    font-size: var(--font-size-xl);
+}
+
+.text-2xl {
+    font-size: var(--font-size-2xl);
+}
+
+.text-primary {
+    color: var(--color-primary);
+}
+
+.font-bold {
+    font-weight: var(--font-weight-bold);
 }
