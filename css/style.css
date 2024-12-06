@@ -1,0 +1,34 @@
+:root {
+    /* Créer les tokens CSS (variables) que vais pouvoir réutilser */
+
+    /* Colors */
+    --color-black: #303031;
+    --color-gray: #66645e;
+    --color-gray-light: #f3f0ea;
+    --color-white: #ffffff;
+    --color-primary: #71a894;
+    --color-secondary: #f5c64f;
+
+    /* Shadow */
+    --shadow-md: 0 2px 8px 0 rgb(0 0 0 / 0.1);
+
+    /* Fonts */
+    --font-family-heading: "Chonburi", serif;
+    --font-family-base: "system-ui", sans-serif;
+
+    /* Font sizes */
+    --font-size-base: 1rem; /* 16px */
+    --font-size-lg: 1.5rem;
+    --font-size-xl: 3rem;
+    --font-size-2xl: 4rem;
+
+    /* Font weight */
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+
+    /* Spacing */
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 3rem;
+    --spacing-2xl: 4rem;
+}
