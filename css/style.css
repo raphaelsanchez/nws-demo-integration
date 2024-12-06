@@ -4,6 +4,7 @@
     /* Colors */
     --color-black: #303031;
     --color-gray: #66645e;
+    --color-gray-medium: #e5e5e5;
     --color-gray-light: #f3f0ea;
     --color-white: #ffffff;
     --color-primary: #71a894;
@@ -56,7 +57,7 @@ body {
     font-family: var(--font-family-base);
     font-size: var(--font-size-base);
     color: var(--color-black);
-    background-color: var(--color-gray-light);
+    background-color: var(--color-white);
 }
 
 /* Heding */
@@ -133,4 +134,28 @@ nav a {
         align-items: center;
         justify-content: space-between;
     }
+}
+
+/* Hero section */
+.hero {
+    padding: var(--spacing-xl) var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+    .hero {
+        display: flex;
+        align-items: center;
+    }
+}
+
+/* Container : Définis la largeur max d'une section ou autre */
+.container,
+.container-wide {
+    margin-inline: auto;
+}
+.container {
+    max-width: var(--container-default);
+}
+.container-wide {
+    max-width: var(--container-wide);
 }
