@@ -258,7 +258,6 @@ nav a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
     gap: var(--spacing-md);
     padding: var(--spacing-lg);
 }
@@ -301,6 +300,7 @@ Un bouton pour ouvrir et fermer le menu de navigation sur mobile.
     padding: var(--spacing-md);
     background: none;
     border: none;
+    color: var(--color-primary);
 }
 
 /* Les icones */
